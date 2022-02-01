@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version '7.1.2'
+}
+
+group 'net.marcusslover'
+version '1.0-SNAPSHOT'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://papermc.io/repo/repository/maven-public/' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}

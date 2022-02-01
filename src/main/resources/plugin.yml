@@ -1,0 +1,6 @@
+name: CooldownTutorial
+main: net.marcusslover.cooldown.CooldownTutorial
+version: 1.0
+api-version: 1.18
+commands:
+  gun:
