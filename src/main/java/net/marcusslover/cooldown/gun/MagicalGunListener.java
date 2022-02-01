@@ -14,7 +14,6 @@ import org.bukkit.util.Vector;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MagicalGunListener implements Listener {
 
@@ -39,7 +38,11 @@ public class MagicalGunListener implements Listener {
         Location hit = destination.toLocation(world);
 
         Collection<Entity> nearbyEntities = world.getNearbyEntities(hit, 2, 2, 2);
-        List<LivingEntity> livingEntities = nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity && entity != player).map(entity -> (LivingEntity) entity).toList();
+        List<LivingEntity> livingEntities = nearbyEntities
+                .stream()
+                .filter(entity -> entity instanceof LivingEntity && entity != player)
+                .map(entity -> (LivingEntity) entity)
+                .toList();
 
         Entity hitEntity = result.getHitEntity();
         if (hitEntity instanceof LivingEntity livingEntity) {
