@@ -13,6 +13,8 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MagicalGunListener implements Listener {
 
@@ -37,7 +39,14 @@ public class MagicalGunListener implements Listener {
         Location hit = destination.toLocation(world);
 
         Collection<Entity> nearbyEntities = world.getNearbyEntities(hit, 3, 3, 3);
-        nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity && entity != player).map(entity -> (LivingEntity) entity).forEach(entity -> entity.damage(7.0, player));
+        List<LivingEntity> livingEntities = nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity && entity != player).map(entity -> (LivingEntity) entity).toList();
+
+        Entity hitEntity = result.getHitEntity();
+        if (hitEntity instanceof LivingEntity livingEntity) {
+            if (!livingEntities.contains(livingEntity)) livingEntities.add(livingEntity);
+        }
+        livingEntities.forEach(livingEntity -> livingEntity.damage(7.0, player));
+
         world.spawnParticle(Particle.EXPLOSION_LARGE, hit, 1, 0, 0, 0, 0);
         world.playSound(hit, Sound.ENTITY_BLAZE_HURT, 0.5f, 1.5f);
 
