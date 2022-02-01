@@ -37,7 +37,7 @@ public class MagicalGunListener implements Listener {
         Location hit = destination.toLocation(world);
 
         Collection<Entity> nearbyEntities = world.getNearbyEntities(hit, 3, 3, 3);
-        nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity).map(entity -> (LivingEntity) entity).forEach(entity -> entity.damage(5.0));
+        nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity && entity != player).map(entity -> (LivingEntity) entity).forEach(entity -> entity.damage(7.0, player));
         world.spawnParticle(Particle.EXPLOSION_LARGE, hit, 1, 0, 0, 0, 0);
         world.playSound(hit, Sound.ENTITY_BLAZE_HURT, 0.5f, 1.5f);
 
