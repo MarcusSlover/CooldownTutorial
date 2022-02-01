@@ -33,12 +33,12 @@ public class MagicalGunListener implements Listener {
         location.setY(location.getY() + 1.65);
         Vector origin = location.toVector();
 
-        RayTraceResult result = player.rayTraceBlocks(30, FluidCollisionMode.NEVER);
+        RayTraceResult result = player.rayTraceBlocks(50, FluidCollisionMode.NEVER);
         if (result == null) return;
         Vector destination = result.getHitPosition();
         Location hit = destination.toLocation(world);
 
-        Collection<Entity> nearbyEntities = world.getNearbyEntities(hit, 3, 3, 3);
+        Collection<Entity> nearbyEntities = world.getNearbyEntities(hit, 1, 1, 1);
         List<LivingEntity> livingEntities = nearbyEntities.stream().filter(entity -> entity instanceof LivingEntity && entity != player).map(entity -> (LivingEntity) entity).toList();
 
         Entity hitEntity = result.getHitEntity();
